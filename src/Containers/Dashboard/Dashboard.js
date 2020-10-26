@@ -287,35 +287,6 @@ class Dashboard extends Component {
                             })}
                         </Table.Body>
                     </Table>
-
-                    <h3>Purchase Logs (Product)</h3>
-                    <Table size='small'>
-                        <Table.Header>
-                            <Table.Row>
-                                <Table.HeaderCell>Product Id</Table.HeaderCell>
-                                <Table.HeaderCell textAlign='right'>Count</Table.HeaderCell>
-                                <Table.HeaderCell textAlign='right'>Sales($)</Table.HeaderCell>
-                            </Table.Row>
-                        </Table.Header>
-
-                        <Table.Body>
-                            {product.map((e) => {
-                                return (
-                                    <Table.Row key={e.key}>
-                                        <Table.Cell>{e.key}</Table.Cell>
-                                        <Table.Cell textAlign='right'>{e.value}</Table.Cell>
-                                        <Table.Cell
-                                            textAlign='right'>{parseInt(e.value * price.get(e.key)).toLocaleString()}</Table.Cell>
-                                    </Table.Row>
-                                )
-                            })}
-                        </Table.Body>
-                    </Table>
-
-                    <div>
-                        <a href='https://etherscan.io/address/0x9702a479115788294232c384a5c1f42c881789fe'>OWNER</a><br/>
-                        <a href='https://etherscan.io/address/0x3113Bf50Ee2773cD7EecBb48d1F6a197e01C294b'>SHOP</a><br/>
-                    </div>
                 </div>
             </div>
         );
