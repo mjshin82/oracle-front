@@ -1,0 +1,19 @@
+.CheckGift {
+    margin-bottom: 3rem;
+}
+
+.CheckGift .AuthBox {
+    max-width: 30rem;
+}
+
+.CheckGift h1 {
+    padding-top: 20px;
+    margin: 0 0 1rem 0;
+    font-size: 2.4rem;
+    font-weight: bold;
+    color: #646464;
+}
+
+.CheckGiftDescBox {
+    margin-bottom: 2rem;
+}

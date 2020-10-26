@@ -1,0 +1,20 @@
+.Footer {
+    margin-top: 2em;
+    margin-bottom: 3em;
+    font-size: 1em;
+    text-align: left;
+}
+
+.FooterWrapper {
+    width: 100%;
+    margin: 0 auto;
+    max-width: 700px;
+    padding: 2rem;
+}
+
+.Footer a {
+    margin-right: 0.1rem;
+    cursor: pointer;
+    text-decoration: underline;
+}
+

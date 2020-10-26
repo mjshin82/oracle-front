@@ -1,0 +1,27 @@
+.DownloadBox {
+    margin-top: 4rem;
+}
+
+.DownloadBox h1 {
+    padding-top: 70px;
+    margin: 0 0 1rem 0;
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #626262;
+}
+
+.GameInfoDescBox {
+    margin: 1rem 0 1rem 0;
+    line-height: 1.5;
+    font-size: 1.25rem;
+}
+
+.GameInfoDescBox div {
+    margin-bottom: 0.5rem;
+}
+
+.DownloadIconBox img {
+    text-align: left;
+    margin-right: 0.5rem;
+    display: inline;
+}

@@ -1,0 +1,25 @@
+shtml {
+    font-size: 12px;
+}
+
+body {
+    text-align: left;
+    font-size:1rem;
+    color:#626262;
+    padding:0;
+    margin:0;
+}
+
+.ui.modal > .close {
+    top: .5rem!important;
+    right: .5rem!important;
+    z-index: 1;
+    color: rgba(0,0,0,.87);
+}
+
+@media only screen and (max-width: 991px) {
+    .ui.modal > .close {
+        top: .5rem!important;
+        right: .5rem!important;
+    }
+}

@@ -1,0 +1,40 @@
+.Dashboard {
+    margin-bottom: 3rem;
+}
+
+.Dashboard .AuthBox {
+    max-width: 30rem;
+}
+
+.Dashboard h1 {
+    padding-top: 20px;
+    margin: 0 0 1rem 0;
+    font-size: 2.4rem;
+    font-weight: bold;
+    color: #646464;
+}
+
+.DashboardDescBox {
+    margin: 1rem 0 1rem 0;
+    line-height: 1.5;
+    font-size: 1.25rem;
+}
+
+.DashboardDescBox div {
+    margin-bottom: 0.5rem;
+}
+
+.EthAddressBox {
+    margin-top: 1.5rem;
+}
+
+.EthAddress {
+    display: block;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.Chart {
+    height: 200px;
+}
