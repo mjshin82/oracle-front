@@ -148,10 +148,10 @@ class Dashboard extends Component {
             }
         };
 
-        let ks11PredLow = ks11.predLow !== undefined ? parseInt(ks11.predLow['19']): 0;
-        let ks11PredHigh = ks11.predHigh !== undefined ? parseInt(ks11.predHigh['19']): 0;
-        let kq11PredLow = kq11.predLow !== undefined ? parseInt(kq11.predLow['19']): 0;
-        let kq11PredHigh = kq11.predHigh !== undefined ? parseInt(kq11.predHigh['19']): 0;
+        let ks11PredLow = dashboardService.ksLow;
+        let ks11PredHigh = dashboardService.ksHigh;
+        let kq11PredLow = dashboardService.kqLow;
+        let kq11PredHigh = dashboardService.kqHigh;
 
         return (
             <div id="Dashboard" className="Dashboard">
