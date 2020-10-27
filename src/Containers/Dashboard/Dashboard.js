@@ -22,9 +22,9 @@ class Dashboard extends Component {
         this.refreshData();
     }
 
-    refreshData = async () => {
-        await tfService.initialize();
-        await dashboardService.initialize();
+    refreshData = () => {
+        //await tfService.initialize();
+        dashboardService.initialize();
 
         let ks11 = dashboardService.output['KS11'];
         let kq11 = dashboardService.output['KQ11'];

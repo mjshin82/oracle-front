@@ -1,6 +1,6 @@
-import www from "../Utils/www.js";
-import Config from "../Config/Config.js"
 import moment from 'moment';
+import ks11 from '../Data/output/KS11.json'
+import kq11 from '../Data/output/KQ11.json'
 
 class DashboardService {
   constructor() {
@@ -16,8 +16,8 @@ class DashboardService {
   }
 
   initialize = async () => {
-    await this.loadOutput('KS11');
-    await this.loadOutput('KQ11');
+    this.output['KS11'] = ks11;
+    this.output['KQ11'] = kq11;
 
     let index = "19";
     if (this.output['KS11'].Date['18'] === this.today) {
@@ -44,16 +44,6 @@ class DashboardService {
 
     console.error("ksHigh:" + this.ksHigh);
   };
-
-  loadOutput = async (code) => {
-    let baseUrl = "/";
-    if (Config.env === 'production') {
-      baseUrl = "/oracle-front/";
-    }
-
-    let url = baseUrl + "data/output/" + code + ".json";
-    this.output[code] = await www.get(url, true);
-  }
 }
 
 export default new DashboardService();
