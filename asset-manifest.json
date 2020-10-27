@@ -1,0 +1,18 @@
+{
+  "files": {
+    "main.css": "/oracle-front/static/css/main.f560cc99.chunk.css",
+    "main.js": "/oracle-front/static/js/main.7950fb44.chunk.js",
+    "main.js.map": "/oracle-front/static/js/main.7950fb44.chunk.js.map",
+    "runtime~main.js": "/oracle-front/static/js/runtime~main.0e1e4dc0.js",
+    "runtime~main.js.map": "/oracle-front/static/js/runtime~main.0e1e4dc0.js.map",
+    "static/css/2.7554c24b.chunk.css": "/oracle-front/static/css/2.7554c24b.chunk.css",
+    "static/js/2.6387009b.chunk.js": "/oracle-front/static/js/2.6387009b.chunk.js",
+    "static/js/2.6387009b.chunk.js.map": "/oracle-front/static/js/2.6387009b.chunk.js.map",
+    "index.html": "/oracle-front/index.html",
+    "precache-manifest.212a7a9dbcc60601ba883e285e4166b8.js": "/oracle-front/precache-manifest.212a7a9dbcc60601ba883e285e4166b8.js",
+    "service-worker.js": "/oracle-front/service-worker.js",
+    "static/css/2.7554c24b.chunk.css.map": "/oracle-front/static/css/2.7554c24b.chunk.css.map",
+    "static/css/main.f560cc99.chunk.css.map": "/oracle-front/static/css/main.f560cc99.chunk.css.map",
+    "static/media/semantic.min.css": "/oracle-front/static/media/outline-icons.ef60a4f6.woff"
+  }
+}
