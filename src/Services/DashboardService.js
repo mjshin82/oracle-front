@@ -1,4 +1,5 @@
 import www from "../Utils/www.js";
+import Config from "../Config/Config.js"
 
 class DashboardService {
   constructor() {
@@ -14,7 +15,12 @@ class DashboardService {
   };
 
   loadOutput = async (code) => {
-    let url = "/data/output/" + code + ".json";
+    let baseUrl = "/";
+    if (Config.env == 'production') {
+      baseUrl = "/oracle-front/";
+    }
+
+    let url = baseUrl + "data/output/" + code + ".json";
     this.output[code] = await www.get(url, true);
   }
 }

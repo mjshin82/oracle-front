@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {Message, Menu, Table} from "semantic-ui-react";
 import dashboardService from '../../Services/DashboardService';
 import tfService from '../../Services/TensorflowService';
+import util from '../../Utils/util'
 
 import './Dashboard.css';
 import { Line } from 'react-chartjs-2';
@@ -13,7 +14,7 @@ class Dashboard extends Component {
         this.state = {
             ks11: {},
             kq11: {},
-            from: 11
+            from: util.isMobile() ? 11: 0
         };
     }
 

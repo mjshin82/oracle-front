@@ -9,6 +9,7 @@
     "dotenv": "^8.2.0",
     "env-cmd": "^10.1.0",
     "firebase": "^6.4.2",
+    "gh-pages": "^3.1.0",
     "lodash": "^4.17.15",
     "react": "^16.9.0",
     "react-canvas-js": "^1.0.1",
@@ -28,7 +29,7 @@
     "local": "env-cmd -f .env.local react-scripts start",
     "build": "react-scripts build",
     "predeploy": "yarn run build",
-    "deploy": "yarn run build && echo 'mj-raindays.github.io' > ./build/CNAME && gh-pages -d build",
+    "deploy": "yarn run build && echo 'mj-raindays.github.io/oracle-front/' > ./build/CNAME && gh-pages -d build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
@@ -38,5 +39,5 @@
     "not ie <= 11",
     "not op_mini all"
   ],
-  "homepage": "http://mj-raindays.github.io.io/"
+  "homepage": "http://mj-raindays.github.io.io/oracle-front/"
 }
