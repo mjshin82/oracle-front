@@ -1,17 +1,19 @@
 import React, {Component} from 'react';
 import {Message, Menu, Table} from "semantic-ui-react";
-import accountService from '../../Services/AccountService';
 import dashboardService from '../../Services/DashboardService';
+import tfService from '../../Services/TensorflowService';
+
 import './Dashboard.css';
-import {Line} from 'react-chartjs-2';
+import { Line } from 'react-chartjs-2';
 
 class Dashboard extends Component {
     constructor(props) {
         super(props);
 
         this.state = {
-            totalAccount: 0,
-            duration: 14,
+            ks11: {},
+            kq11: {},
+            from: 11
         };
     }
 
@@ -20,167 +22,102 @@ class Dashboard extends Component {
     }
 
     refreshData = async () => {
-        await dashboardService.getAllIapLogs();
+        await tfService.initialize();
+        await dashboardService.initialize();
 
-        let res = await accountService.getCount();
-        if (res != null) {
-            this.setState({
-                totalAccount: res
-            });
-        }
+        let ks11 = dashboardService.output['KS11'];
+        let kq11 = dashboardService.output['KQ11'];
+        this.setState({
+            ks11 : ks11,
+            kq11 : kq11
+        });
     };
 
     handleItemClick = (e, {value}) => {
         this.setState({duration: value})
     };
 
-    render() {
-        const {totalAccount, duration} = this.state;
-
-        let store = [];
-        let product = [];
-        let price = dashboardService.price;
-        let storeS = dashboardService.storeS;
-        let storeR = dashboardService.storeR;
-        dashboardService.store.forEach((value, key) => store.push({key, value}));
-        dashboardService.product.forEach((value, key) => product.push({key, value}));
-
-
-        let iapLogs = dashboardService.iapLogs;
-        let apple = [];
-        let android = [];
-        let web = [];
-        let tweb = [];
-        let sum = [];
-
-        let lastKey = '';
-        let lastApple = 0;
-        let lastAndroid = 0;
-        let lastWeb = 0;
-        let lastTWeb = 0;
-        let lastYmdt = null;
-        let labels = [];
-
-        iapLogs.sort((a, b)=> {
-            return a.purchaseYmdt - b.purchaseYmdt;
-        });
-
-        iapLogs.forEach(e => {
-            let ymdt = new Date(e.purchaseYmdt * 1000 - 3600 * 9 * 1000);
-            let key = ymdt.getFullYear() + "-" + (ymdt.getMonth() + 1) + "-" + ymdt.getDate();
-            let price = dashboardService.price.get(e.productId);
-            if (e.no >= this.v2No && this.price.get(e.productId + "-v2") !== null) {
-                price = this.price.get(e.productId + "-v2");
-            }
-
-            if (lastKey !== key) {
-                if (lastYmdt != null) {
-                    //var date = new Date(lastYmdt.getFullYear(), lastYmdt.getMonth(), lastYmdt.getDate());
-                    var date = (1 + lastYmdt.getMonth()) + "-" + lastYmdt.getDate();
-                    apple.push({x: date, y: parseInt(lastApple)});
-                    android.push({x: date, y: parseInt(lastAndroid)});
-                    web.push({x: date, y: parseInt(lastWeb)});
-                    tweb.push({x: date, y: parseInt(lastTWeb)});
-                    sum.push({x: date, y: parseInt(lastApple + lastAndroid + lastWeb + lastTWeb)});
-                    labels.push(date);
-                }
-
-                lastApple = 0;
-                lastAndroid = 0;
-                lastWeb = 0;
-                lastTWeb = 0;
-                lastKey = key;
-            }
-
-            if (e.store === 'ios') {
-                lastApple += price;
-            } else if (e.store === 'android') {
-                lastAndroid += price;
-            } else if (e.store === 'WEB') {
-                lastWeb += price;
-            } else if (e.store === 'TWEB') {
-                lastTWeb += price;
-            }
-
-            lastYmdt = ymdt;
-        });
-
-        if (lastYmdt != null) {
-            var date = (1 + lastYmdt.getMonth()) + "-" + lastYmdt.getDate();
-            apple.push({x: date, y: parseInt(lastApple)});
-            android.push({x: date, y: parseInt(lastAndroid)});
-            web.push({x: date, y: parseInt(lastWeb)});
-            tweb.push({x: date, y: parseInt(lastTWeb)});
-            sum.push({x: date, y: parseInt(lastApple + lastAndroid + lastWeb + lastTWeb)});
-            labels.push(date);
+    readyData1 = (date) => {
+        if (date === undefined || date === null) {
+            return null;
         }
 
-        if (duration > 0) {
-            apple = apple.splice(apple.length - duration);
-            android = android.splice(android.length - duration);
-            web = web.splice(web.length - duration);
-            tweb = tweb.splice(tweb.length - duration);
-            sum = sum.splice(sum.length - duration);
-            labels = labels.splice(labels.length - duration);
+        let res = [];
+        const from = this.state.from;
+        for (let i=from; i<20; i++) {
+            res[i-from] = date[`${i}`];
         }
 
-        let maxValue = 0;
-        sum.forEach(e => {
-            maxValue = Math.max(e.y, maxValue);
-        });
+        return res;
+    };
 
-        maxValue = parseInt(Math.ceil(maxValue / 400.0) * 400);
-
-        let pointSize = 8;
-        if (duration == 0 || duration > 14) {
-            pointSize = 0;
+    readyData2 = (low, high) => {
+        if (low === undefined || low === null) {
+            return null;
+        }
+        if (high === undefined || high === null) {
+            return null;
         }
 
-        let data = {
-            labels: labels,
+        let res = [];
+        const from = this.state.from;
+        for (let i=from; i<20; i++) {
+            res[i-from] = [];
+            res[i-from][0] = parseInt(low[`${i}`]);
+            res[i-from][1] = parseInt(high[`${i}`]);
+        }
+
+        return res;
+    };
+
+    makeData = (output) => {
+        if (output.Date === undefined) {
+            return null;
+        }
+
+        return {
+            labels: this.readyData1(output.Date),
             datasets: [{
-                label: 'Android',
-                backgroundColor: 'rgb(217, 83, 79)',
-                borderColor: 'rgba(217, 83, 79, 0.1)',
-                data: android,
-                fill: true,
-                pointRadius: 0.2,
-                yAxisID: 'y-axis-1',
-            }, {
-                label: 'iOS',
-                backgroundColor: 'rgb(92, 184, 92)',
-                borderColor: 'rgba(92, 184, 92, 0.1)',
-                data: apple,
-                fill: true,
-                pointRadius: 0.2,
-                yAxisID: 'y-axis-1',
-            }, {
-                label: 'Web',
-                backgroundColor: 'rgb(2, 117, 216)',
-                borderColor: 'rgba(2, 117, 216, 0.1)',
-                data: web,
-                fill: true,
-                pointRadius: 0.2,
-                yAxisID: 'y-axis-1',
-            }, {
-                label: 'TWeb',
-                backgroundColor: 'rgb(245, 233, 66)',
-                borderColor: 'rgba(245, 233, 66, 0.1)',
-                data: tweb,
-                fill: true,
-                pointRadius: 0.2,
-                yAxisID: 'y-axis-1',
-            }, {
-                label: 'Sum',
-                backgroundColor: 'rgb(0, 0, 0)',
-                borderColor: 'rgba(0, 0, 0, 1)',
-                data: sum,
+                label: '종가',
+                type: 'line',
+                borderColor: 'rgba(0, 0, 0, 0.5)',
                 fill: false,
-                pointRadius: pointSize,
-                pointHoverRadius: pointSize,
-                yAxisID: 'y-axis-2',
+                data: this.readyData1(output.Close),
+                pointRadius: 4,
+            }, {
+                label: 'AI예상',
+                type: 'bar',
+                backgroundColor: 'rgba(255, 255, 0, 0.5)',
+                borderColor: 'rgba(255, 255, 0, 0.5)',
+                data: this.readyData2(output.predLow, output.predHigh),
+                pointRadius: 0.2,
+                barPercentage: 0.8,
+                categoryPercentage: 1,
+            }, {
+                label: '저가',
+                type: 'line',
+                backgroundColor: 'white',
+                borderColor: 'rgba(0, 0, 255,0.5)',
+                data: this.readyData1(output.Low),
+                pointRadius: 0.2,
+                fill: '1'
+            }, {
+                label: '고가',
+                type: 'line',
+                backgroundColor: 'rgba(0, 0, 255,0.5)',
+                borderColor: 'rgba(0, 255, 0,0.5)',
+                data: this.readyData1(output.High),
+                pointRadius: 0.2,
+                fill: '-1'
             }]
         };
+    };
+
+    render() {
+        let ks11 = dashboardService.output['KS11'];
+        let kq11 = dashboardService.output['KQ11'];
+        let ks11Data = this.makeData(ks11);
+        let kq11Data = this.makeData(kq11);
 
         let options = {
             responsive: true,
@@ -192,101 +129,55 @@ class Dashboard extends Component {
             },
             elements: {
                 point: {
-                    pointStyle: 'rect'
+                    pointStyle: 'circle'
+                },
+                line: {
+                    tension: 0.000001
                 }
             },
             scales: {
+                xAxes: [{
+                    offset: true,
+                }],
                 yAxes: [{
                     type: 'linear',
-                    stacked: true,
                     position: 'left',
                     id: 'y-axis-1',
-                    ticks: {
-                        min: 0,
-                        max: maxValue
-                    }
-                }, {
-                    type: 'linear',
-                    display: false,
-                    position: 'left',
-                    id: 'y-axis-2',
-                    ticks: {
-                        min: 0,
-                        max: maxValue
-                    }
                 }]
             }
         };
 
+        let ks11PredLow = ks11.predLow !== undefined ? parseInt(ks11.predLow['19']): 0;
+        let ks11PredHigh = ks11.predHigh !== undefined ? parseInt(ks11.predHigh['19']): 0;
+        let kq11PredLow = kq11.predLow !== undefined ? parseInt(kq11.predLow['19']): 0;
+        let kq11PredHigh = kq11.predHigh !== undefined ? parseInt(kq11.predHigh['19']): 0;
 
         return (
             <div id="Dashboard" className="Dashboard">
-                <h1>Dashboard</h1>
                 <div className="DashboardDescBox">
                     <Message info>
-                        <Message.Header>Total Account</Message.Header>
-                        <Message.Content>
-                            {totalAccount} Account
-                        </Message.Content>
+                        <Message.Header>KOSPI 예상</Message.Header>
+                        저가: {ks11PredLow}<br/>
+                        고가: {ks11PredHigh}
                     </Message>
 
-                    <div>
-                    </div>
+                    {ks11Data ?
+                        <Line data={ks11Data} height={250} options={options}/>
+                        :
+                        ""
+                    }
+                    <br/>
 
-                    <h3>Purchase Logs (Store)</h3>
-                    <Menu>
-                        <Menu.Item
-                            name='7 Days'
-                            value={7}
-                            active={duration === 7}
-                            onClick={this.handleItemClick}
-                        />
-                        <Menu.Item
-                            name='14 Days'
-                            value={14}
-                            active={duration === 14}
-                            onClick={this.handleItemClick}
-                        />
-                        <Menu.Item
-                            name='30 Days'
-                            value={30}
-                            active={duration === 30}
-                            onClick={this.handleItemClick}
-                        />
-                        <Menu.Item
-                            name='All'
-                            value={0}
-                            active={duration === 0}
-                            onClick={this.handleItemClick}
-                        />
-                    </Menu>
-                    <Line data={data} height={250} options={options}/>
-
-                    <Table size='small'>
-                        <Table.Header>
-                            <Table.Row>
-                                <Table.HeaderCell>Store</Table.HeaderCell>
-                                <Table.HeaderCell textAlign='right'>Count</Table.HeaderCell>
-                                <Table.HeaderCell textAlign='right'>Sales($)</Table.HeaderCell>
-                                <Table.HeaderCell textAlign='right'>Revenue($)</Table.HeaderCell>
-                            </Table.Row>
-                        </Table.Header>
-
-                        <Table.Body>
-                            {store.map((e) => {
-                                return (
-                                    <Table.Row key={e.key}>
-                                        <Table.Cell>{e.key}</Table.Cell>
-                                        <Table.Cell textAlign='right'>{e.value}</Table.Cell>
-                                        <Table.Cell
-                                            textAlign='right'>{parseInt(storeS.get(e.key)).toLocaleString()}</Table.Cell>
-                                        <Table.Cell
-                                            textAlign='right'>{parseInt(storeR.get(e.key)).toLocaleString()}</Table.Cell>
-                                    </Table.Row>
-                                )
-                            })}
-                        </Table.Body>
-                    </Table>
+                    <Message info>
+                        <Message.Header>KOSDAQ 예상</Message.Header>
+                        저가: {kq11PredLow}<br/>
+                        고가: {kq11PredHigh}
+                    </Message>
+                    {kq11Data ?
+                        <Line data={kq11Data} height={250} options={options}/>
+                        :
+                        ""
+                    }
                 </div>
             </div>
         );
