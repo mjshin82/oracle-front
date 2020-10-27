@@ -23,7 +23,7 @@ class TopNav extends Component {
           <div className='TopNavBox'>
             <div className='TopNavBoxWrapper'>
               <div className="TopNavC">
-
+                주식예보
               </div>
               <div className="TopNavR">
               </div>
