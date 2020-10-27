@@ -3,6 +3,7 @@ import {Message, Menu, Table} from "semantic-ui-react";
 import dashboardService from '../../Services/DashboardService';
 import tfService from '../../Services/TensorflowService';
 import util from '../../Utils/util'
+import updated from '../../Data/LastUpdate.json'
 
 import './Dashboard.css';
 import { Line } from 'react-chartjs-2';
@@ -195,6 +196,9 @@ class Dashboard extends Component {
                         <h5>투자에 대한 책임을 지지 않습니다.</h5>
                         데이터가 정확하지 않을 수 있습니다. 보조 지표로만 이용해 주세요.
                     </Message>
+                    <div>
+                        최종 갱신 {updated.lastUpdated}
+                    </div>
                 </div>
             </div>
         );
