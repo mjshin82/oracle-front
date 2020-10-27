@@ -5,6 +5,10 @@ import {
   MainBody,
   TopNav,
 } from "./Containers";
+import {
+  Footer,
+} from "./Components";
+
 import 'react-s-alert/dist/s-alert-default.css';
 import 'react-s-alert/dist/s-alert-css-effects/slide.css';
 import "./App.css";
@@ -26,6 +30,7 @@ class App extends Component {
             <Alert stack={{limit: 3}} />
           </div>
         </div>
+        <Footer/>
       </div>
     );
   }
