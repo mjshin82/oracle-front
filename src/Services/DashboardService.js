@@ -19,29 +19,30 @@ class DashboardService {
     await this.loadOutput('KS11');
     await this.loadOutput('KQ11');
 
-    if (parseInt(this.hour) < 15) {
-      let index = "19";
-      if (this.output['KS11'].Date['18'] === this.today) {
+    let index = "19";
+    if (this.output['KS11'].Date['18'] === this.today) {
+      if (parseInt(this.hour) >= 9 && parseInt(this.hour) < 15) {
         index = "18";
-        this.output['KS11'].Date['18'] = '오늘';
-        this.output['KS11'].Date['19'] = '다음장';
-        this.output['KQ11'].Date['18'] = '오늘';
-        this.output['KQ11'].Date['19'] = '다음장';
-      } else {
-        this.output['KS11'].Date['19'] = '오늘';
-        this.output['KQ11'].Date['19'] = '오늘';
       }
 
-      this.ksLow = parseInt(this.output['KS11'].predLow[index]);
-      this.ksHigh = parseInt(this.output['KS11'].predHigh[index]);
-      this.kqLow = parseInt(this.output['KQ11'].predLow[index]);
-      this.kqHigh = parseInt(this.output['KQ11'].predHigh[index]);
+      this.output['KS11'].Date['18'] = '오늘';
+      this.output['KS11'].Date['19'] = '다음장';
+      this.output['KQ11'].Date['18'] = '오늘';
+      this.output['KQ11'].Date['19'] = '다음장';
+    } else if (this.output['KS11'].Date['19'] === this.today) {
+      this.output['KS11'].Date['19'] = '오늘';
+      this.output['KQ11'].Date['19'] = '오늘';
     } else {
-      this.ksLow = parseInt(this.output['KS11']['predLow']['PREDICT']);
-      this.ksHigh = parseInt(this.output['KS11']['predHigh']['PREDICT']);
-      this.kqLow = parseInt(this.output['KQ11']['predLow']['PREDICT']);
-      this.kqHigh = parseInt(this.output['KQ11']['predHigh']['PREDICT']);
+      this.output['KS11'].Date['19'] = '다음장';
+      this.output['KQ11'].Date['19'] = '다음장';
     }
+
+    this.ksLow = parseInt(this.output['KS11'].predLow[index]);
+    this.ksHigh = parseInt(this.output['KS11'].predHigh[index]);
+    this.kqLow = parseInt(this.output['KQ11'].predLow[index]);
+    this.kqHigh = parseInt(this.output['KQ11'].predHigh[index]);
+
+    console.error("ksHigh:" + this.ksHigh);
   };
 
   loadOutput = async (code) => {

@@ -14,7 +14,7 @@ class Dashboard extends Component {
         this.state = {
             ks11: {},
             kq11: {},
-            from: util.isMobile() ? 11: 0
+            from: util.isMobile() ? 8: 0
         };
     }
 
