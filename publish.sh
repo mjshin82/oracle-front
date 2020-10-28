@@ -1,3 +1,4 @@
+pyenv shell 3.6.8
 cd /home/oracle/work/oracle-front
 echo '{"lastUpdated":"' | tr -d '\n' > ./src/Data/LastUpdate.json
 date "+%Y-%m-%d %H:%M:%S" | tr -d '\n' >> ./src/Data/LastUpdate.json
