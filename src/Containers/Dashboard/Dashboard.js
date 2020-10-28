@@ -163,6 +163,10 @@ class Dashboard extends Component {
 
         return (
             <div id="Dashboard" className="Dashboard">
+                <div>
+                    최종 갱신 {updated.lastUpdated}
+                </div>
+                
                 <div className="DashboardDescBox">
                     <Message info>
                         <Message.Header>KOSPI 예상</Message.Header>
@@ -216,9 +220,6 @@ class Dashboard extends Component {
                         <h5>투자에 대한 책임을 지지 않습니다.</h5>
                         데이터가 정확하지 않을 수 있습니다. 보조 지표로만 이용해 주세요.
                     </Message>
-                    <div>
-                        최종 갱신 {updated.lastUpdated}
-                    </div>
                 </div>
             </div>
         );
