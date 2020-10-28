@@ -14,6 +14,7 @@ class Dashboard extends Component {
 
         this.state = {
             ks11: {},
+            ks200: {},
             kq11: {},
             from: util.isMobile() ? 8: 0
         };
@@ -29,8 +30,10 @@ class Dashboard extends Component {
 
         let ks11 = dashboardService.output['KS11'];
         let kq11 = dashboardService.output['KQ11'];
+        let ks200 = dashboardService.output['KS200'];
         this.setState({
             ks11 : ks11,
+            ks200 : ks200,
             kq11 : kq11
         });
     };
@@ -117,8 +120,10 @@ class Dashboard extends Component {
 
     render() {
         let ks11 = dashboardService.output['KS11'];
+        let ks200 = dashboardService.output['KS200'];
         let kq11 = dashboardService.output['KQ11'];
         let ks11Data = this.makeData(ks11);
+        let ks200Data = this.makeData(ks200);
         let kq11Data = this.makeData(kq11);
 
         let options = {
@@ -151,6 +156,8 @@ class Dashboard extends Component {
 
         let ks11PredLow = dashboardService.ksLow;
         let ks11PredHigh = dashboardService.ksHigh;
+        let ks200PredLow = dashboardService.ks200Low;
+        let ks200PredHigh = dashboardService.ks200High;
         let kq11PredLow = dashboardService.kqLow;
         let kq11PredHigh = dashboardService.kqHigh;
 
@@ -165,6 +172,19 @@ class Dashboard extends Component {
 
                     {ks11Data ?
                         <Line data={ks11Data} height={250} options={options}/>
+                        :
+                        ""
+                    }
+                    <br/>
+
+                    <Message info>
+                        <Message.Header>KOSPI 200예상</Message.Header>
+                        저가: {ks200PredLow}<br/>
+                        고가: {ks200PredHigh}
+                    </Message>
+
+                    {ks11Data ?
+                        <Line data={ks200Data} height={250} options={options}/>
                         :
                         ""
                     }
