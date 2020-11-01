@@ -52,6 +52,14 @@ class DashboardService {
     this.ks200High = parseInt(this.output['KS200'].predHigh[index]);
     this.kqLow = parseInt(this.output['KQ11'].predLow[index]);
     this.kqHigh = parseInt(this.output['KQ11'].predHigh[index]);
+
+    this.ksCenterDir = this.output['KS11'].predCenterD[index] > 0 ? 1 : 0;
+    this.ks200CenterDir = this.output['KS200'].predCenterD[index] > 0 ? 1 : 0;
+    this.kqCenterDir = this.output['KQ11'].predCenterD[index] > 0 ? 1 : 0;
+
+    this.ksCloseDir = this.output['KS11'].predCloseD[index] > 0 ? 1 : 0;
+    this.ks200CloseDir = this.output['KS200'].predCloseD[index] > 0 ? 1 : 0;
+    this.kqCloseDir = this.output['KQ11'].predCloseD[index] > 0 ? 1 : 0;
   };
 }
 
