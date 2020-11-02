@@ -176,6 +176,10 @@ class Dashboard extends Component {
         let kq11CloseD = this.getDir(dashboardService.kqCloseDir)
         let kq11CenterD = this.getDir(dashboardService.kqCenterDir)
 
+        this.ks11CloseR = dashboardService.ksCloseR;
+        this.ks200CloseR = dashboardService.ks200CloseR;
+        this.kq11CloseR = dashboardService.kqCloseR;
+
         return (
             <div id="Dashboard" className="Dashboard">
                 <div>
@@ -187,8 +191,14 @@ class Dashboard extends Component {
                         <Message.Header>KOSPI 예상</Message.Header>
                         저가: {ks11PredLow}<br/>
                         고가: {ks11PredHigh}<br/>
-                        종가 예상 방향: {ks11CloseD}<br/>
-                        시장 경향 예상: {ks11CenterD}<br/>
+                        중간가: {ks11CenterD}<br/>
+                        종가: {ks11CloseD}<br/>
+                        { ks11CloseR?
+                            <div>
+                                당일 종가 예측: {ks11CloseR}<br/>
+                            </div>
+                            : ""
+                        }
                     </Message>
 
                     {ks11Data ?
@@ -202,8 +212,14 @@ class Dashboard extends Component {
                         <Message.Header>KOSPI 200예상</Message.Header>
                         저가: {ks200PredLow}<br/>
                         고가: {ks200PredHigh}<br/>
-                        종가 예상 방향: {ks200CloseD}<br/>
-                        시장 경향 예상: {ks200CenterD}<br/>
+                        중간가: {ks200CenterD}<br/>
+                        종가: {ks200CloseD}<br/>
+                        { ks200CloseR?
+                            <div>
+                                당일 종가 예측: {ks11CloseR}<br/>
+                            </div>
+                            : ""
+                        }
                     </Message>
 
                     {ks11Data ?
@@ -217,8 +233,14 @@ class Dashboard extends Component {
                         <Message.Header>KOSDAQ 예상</Message.Header>
                         저가: {kq11PredLow}<br/>
                         고가: {kq11PredHigh}<br/>
-                        종가 예상 방향: {kq11CloseD}<br/>
-                        시장 경향 예상: {kq11CenterD}<br/>
+                        중간가: {kq11CenterD}<br/>
+                        종가: {kq11CloseD}<br/>
+                        { kq11CloseR?
+                            <div>
+                                당일 종가 예측: {ks11CloseR}<br/>
+                            </div>
+                            : ""
+                        }
                     </Message>
                     {kq11Data ?
                         <Line data={kq11Data} height={250} options={options}/>
@@ -234,7 +256,6 @@ class Dashboard extends Component {
                         코스피와 코스닥은 미국 증시 환율등에 영향을 많이 받습니다. 전날의 지수와 다음날의 코스피/코스닥 지수관의 상관관계를 Tensorflow가 자동으로 찾아줍니다.
                         <h5>얼마나 정확한가요?</h5>
                         이전 주가를 기반으로 하는 기술적 분석입니다. 때문에 당일 시장의 분위기나 이슈에 대처할 수는 없습니다. 차트에서 과거의 노란색 영역으로 대략적인 정확도를 확인하실 수 있습니다.
-                        중간가와 종가의 방향 예측은 신뢰도는 각각 70%, 62% 수준입니다.
                         <h5>다음날 예측은 언제 갱신되나요</h5>
                         전날의 한/미/중/유럽장이 미감되야 예측이 완료됩니다. 그전까지는 현재 지수, 아직 장이 열리지 않았으면 전날의 지수를 기반으로 예측합니다. 장 마감 전까지는 예측율이 떨어집니다. 20분마다 갱신됩니다.
                         <h5>왜 만들었나요?</h5>
