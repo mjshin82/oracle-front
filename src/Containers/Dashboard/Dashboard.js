@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Message, Menu, Table} from "semantic-ui-react";
+import {Message, Card, Icon} from "semantic-ui-react";
 import dashboardService from '../../Services/DashboardService';
 import tfService from '../../Services/TensorflowService';
 import util from '../../Utils/util'
@@ -162,44 +162,38 @@ class Dashboard extends Component {
             }
         };
 
-        let ks11PredLow = dashboardService.ksLow;
-        let ks11PredHigh = dashboardService.ksHigh;
-        let ks200PredLow = dashboardService.ks200Low;
-        let ks200PredHigh = dashboardService.ks200High;
-        let kq11PredLow = dashboardService.kqLow;
-        let kq11PredHigh = dashboardService.kqHigh;
-
-        let ks11CloseD = this.getDir(dashboardService.ksCloseDir)
-        let ks11CenterD = this.getDir(dashboardService.ksCenterDir)
-        let ks200CloseD = this.getDir(dashboardService.ks200CloseDir)
-        let ks200CenterD = this.getDir(dashboardService.ks200CenterDir)
-        let kq11CloseD = this.getDir(dashboardService.kqCloseDir)
-        let kq11CenterD = this.getDir(dashboardService.kqCenterDir)
-
-        let ks11CloseR = dashboardService.ksCloseR;
-        let ks200CloseR = dashboardService.ks200CloseR;
-        let kq11CloseR = dashboardService.kqCloseR;
+        let report = dashboardService.report;
 
         return (
             <div id="Dashboard" className="Dashboard">
                 <div>
                     최종 갱신 {updated.lastUpdated}
                 </div>
-
-                <div className="DashboardDescBox">
-                    <Message info>
-                        <Message.Header>KOSPI 예상</Message.Header>
-                        저가: {ks11PredLow}<br/>
-                        고가: {ks11PredHigh}<br/>
-                        중간가: {ks11CenterD}<br/>
-                        종가: {ks11CloseD}<br/>
-                        { ks11CloseR?
-                            <div>
-                                당일 반영 종가 예측: {ks11CloseR}<br/>
-                            </div>
-                            : ""
-                        }
-                    </Message>
+                <div>
+                    <Card>
+                        <Card.Content>
+                        <Card.Header>KOSPI</Card.Header>
+                        <Card.Meta>
+                            <span className='date'>{report['KS11'][0].date}</span>
+                        </Card.Meta>
+                        <Card.Description>
+                            범위 예상: {report['KS11'][0].predLow} - {report['KS11'][0].predHigh}<br/>
+                            중간가 예상: {this.getDir(report['KS11'][0].predCenterDir)}<br/>
+                            종가 예상: {this.getDir(report['KS11'][0].predCloseDir)}<br/>
+                            실제 종가: {report['KS11'][0].close}<br/>
+                        </Card.Description>
+                        </Card.Content>
+                        <Card.Content extra>
+                        <Card.Meta>
+                            <span className='date'>다음장</span>
+                        </Card.Meta>
+                        <Card.Description>
+                            범위 예상: {report['KS11'][1].predLow} - {report['KS11'][1].predHigh}<br/>
+                            중간가 예상: {this.getDir(report['KS11'][1].predCenterDir)}<br/>
+                            종가 예상: {this.getDir(report['KS11'][1].predCloseDir)}<br/>
+                        </Card.Description>
+                        </Card.Content>
+                    </Card>
 
                     {ks11Data ?
                         <Line data={ks11Data} height={250} options={options}/>
@@ -208,19 +202,32 @@ class Dashboard extends Component {
                     }
                     <br/>
 
-                    <Message info>
-                        <Message.Header>KOSPI 200예상</Message.Header>
-                        저가: {ks200PredLow}<br/>
-                        고가: {ks200PredHigh}<br/>
-                        중간가: {ks200CenterD}<br/>
-                        종가: {ks200CloseD}<br/>
-                        { ks200CloseR?
-                            <div>
-                                당일 반영 종가 예측: {ks200CloseR}<br/>
-                            </div>
-                            : ""
-                        }
-                    </Message>
+                    
+                    <Card>
+                        <Card.Content>
+                        <Card.Header>KOSPI 예상</Card.Header>
+                        <Card.Meta>
+                            <span className='date'>{report['KS200'][0].date}</span>
+                        </Card.Meta>
+                        <Card.Description>
+                            범위 예상: {report['KS200'][0].predLow} - {report['KS200'][0].predHigh}<br/>
+                            중간가 예상: {this.getDir(report['KS200'][0].predCenterDir)}<br/>
+                            종가 예상: {this.getDir(report['KS200'][0].predCloseDir)}<br/>
+                            실제 종가: {report['KS200'][0].close}<br/>
+                        </Card.Description>
+                        </Card.Content>
+                        <Card.Content extra>
+                        <Card.Meta>
+                            <span className='date'>다음장</span>
+                        </Card.Meta>
+                        <Card.Description>
+                            범위 예상: {report['KS200'][1].predLow} - {report['KS200'][1].predHigh}<br/>
+                            중간가 예상: {this.getDir(report['KS200'][1].predCenterDir)}<br/>
+                            종가 예상: {this.getDir(report['KS200'][1].predCloseDir)}<br/>
+                        </Card.Description>
+                        </Card.Content>
+                    </Card>
+                    
 
                     {ks11Data ?
                         <Line data={ks200Data} height={250} options={options}/>
@@ -229,19 +236,33 @@ class Dashboard extends Component {
                     }
                     <br/>
 
-                    <Message info>
-                        <Message.Header>KOSDAQ 예상</Message.Header>
-                        저가: {kq11PredLow}<br/>
-                        고가: {kq11PredHigh}<br/>
-                        중간가: {kq11CenterD}<br/>
-                        종가: {kq11CloseD}<br/>
-                        { kq11CloseR?
-                            <div>
-                                당일 반영 종가 예측: {kq11CloseR}<br/>
-                            </div>
-                            : ""
-                        }
-                    </Message>
+                    
+                    <Card>
+                        <Card.Content>
+                        <Card.Header>KOSPI 예상</Card.Header>
+                        <Card.Meta>
+                            <span className='date'>{report['KQ11'][0].date}</span>
+                        </Card.Meta>
+                        <Card.Description>
+                            범위 예상: {report['KQ11'][0].predLow} - {report['KQ11'][0].predHigh}<br/>
+                            중간가 예상: {this.getDir(report['KQ11'][0].predCenterDir)}<br/>
+                            종가 예상: {this.getDir(report['KQ11'][0].predCloseDir)}<br/>
+                            실제 종가: {report['KQ11'][0].close}<br/>
+                        </Card.Description>
+                        </Card.Content>
+                        <Card.Content extra>
+                        <Card.Meta>
+                            <span className='date'>다음장</span>
+                        </Card.Meta>
+                        <Card.Description>
+                            범위 예상: {report['KQ11'][1].predLow} - {report['KQ11'][1].predHigh}<br/>
+                            중간가 예상: {this.getDir(report['KQ11'][1].predCenterDir)}<br/>
+                            종가 예상: {this.getDir(report['KQ11'][1].predCloseDir)}<br/>
+                        </Card.Description>
+                        </Card.Content>
+                    </Card>
+                    
+
                     {kq11Data ?
                         <Line data={kq11Data} height={250} options={options}/>
                         :
