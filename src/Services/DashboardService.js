@@ -52,8 +52,8 @@ class DashboardService {
       predLow: this.output[code].predLow[18].toFixed(2),
       predHigh: this.output[code].predHigh[18].toFixed(2),
       predCenterDir: this.output[code].predCenterD[18] > 0 ? 1 : 0,
-      predCloseDir: this.output[code].predCloseD[18] > 0 ? 1 : 0,
-      closeExp: this.output[code].predClose2[18].toFixed(2)
+      predCloseDir: this.output[code].predCloseMD[18] > 0 ? 1 : 0,
+      closeExp: this.output[code].predCloseM[18].toFixed(2)
     }
 
     this.report[code][1] = {
@@ -63,8 +63,8 @@ class DashboardService {
       predLow: this.output[code].predLow[19].toFixed(2),
       predHigh: this.output[code].predHigh[19].toFixed(2),
       predCenterDir: this.output[code].predCenterD[19] > 0 ? 1 : 0,
-      predCloseDir: this.output[code].predCloseD[19] > 0 ? 1 : 0,
-      closeExp: this.output[code].predClose2[19].toFixed(2)
+      predCloseDir: this.output[code].predCloseMD[19] > 0 ? 1 : 0,
+      closeExp: this.output[code].predCloseM[19].toFixed(2)
     }
   };
 

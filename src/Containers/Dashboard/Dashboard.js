@@ -180,7 +180,7 @@ class Dashboard extends Component {
                             범위 예상: {report['KS11'][0].predLow} - {report['KS11'][0].predHigh}<br/>
                             중간가 예상: {this.getDir(report['KS11'][0].predCenterDir)}<br/>
                             종가 예상: {this.getDir(report['KS11'][0].predCloseDir)}<br/>
-                            실제 종가: {report['KS11'][0].close}<br/>
+                            실제 종가: {report['KS11'][0].close}<br/> 
                         </Card.Description>
                         </Card.Content>
                         <Card.Content extra>
@@ -205,7 +205,7 @@ class Dashboard extends Component {
                     
                     <Card>
                         <Card.Content>
-                        <Card.Header>KOSPI 예상</Card.Header>
+                        <Card.Header>KOSPI 200 예상</Card.Header>
                         <Card.Meta>
                             <span className='date'>{report['KS200'][0].date}</span>
                         </Card.Meta>
@@ -239,7 +239,7 @@ class Dashboard extends Component {
                     
                     <Card>
                         <Card.Content>
-                        <Card.Header>KOSPI 예상</Card.Header>
+                        <Card.Header>KOSDAQ 예상</Card.Header>
                         <Card.Meta>
                             <span className='date'>{report['KQ11'][0].date}</span>
                         </Card.Meta>
