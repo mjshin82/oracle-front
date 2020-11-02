@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/oracle-front/static/css/main.18158c61.chunk.css",
-    "main.js": "/oracle-front/static/js/main.244a8aa5.chunk.js",
-    "main.js.map": "/oracle-front/static/js/main.244a8aa5.chunk.js.map",
+    "main.js": "/oracle-front/static/js/main.fafcd7f0.chunk.js",
+    "main.js.map": "/oracle-front/static/js/main.fafcd7f0.chunk.js.map",
     "runtime~main.js": "/oracle-front/static/js/runtime~main.0e1e4dc0.js",
     "runtime~main.js.map": "/oracle-front/static/js/runtime~main.0e1e4dc0.js.map",
     "static/css/2.7554c24b.chunk.css": "/oracle-front/static/css/2.7554c24b.chunk.css",
     "static/js/2.e20e1146.chunk.js": "/oracle-front/static/js/2.e20e1146.chunk.js",
     "static/js/2.e20e1146.chunk.js.map": "/oracle-front/static/js/2.e20e1146.chunk.js.map",
     "index.html": "/oracle-front/index.html",
-    "precache-manifest.2eb6f09e4834678f7404fecf0bbef270.js": "/oracle-front/precache-manifest.2eb6f09e4834678f7404fecf0bbef270.js",
+    "precache-manifest.94655cf0dfd57f7ae81971b8429f2fa8.js": "/oracle-front/precache-manifest.94655cf0dfd57f7ae81971b8429f2fa8.js",
     "service-worker.js": "/oracle-front/service-worker.js",
     "static/css/2.7554c24b.chunk.css.map": "/oracle-front/static/css/2.7554c24b.chunk.css.map",
     "static/css/main.18158c61.chunk.css.map": "/oracle-front/static/css/main.18158c61.chunk.css.map",
