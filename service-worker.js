@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/oracle-front/precache-manifest.b9fe39e83207ec6177b90bf7c7fcd904.js"
+  "/oracle-front/precache-manifest.4c985c8f336e55782f28b9235da14d57.js"
 );
 
 self.addEventListener('message', (event) => {
