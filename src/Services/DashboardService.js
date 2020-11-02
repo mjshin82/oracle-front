@@ -61,9 +61,9 @@ class DashboardService {
     this.ks200CloseDir = this.output['KS200'].predCloseD[index] > 0 ? 1 : 0;
     this.kqCloseDir = this.output['KQ11'].predCloseD[index] > 0 ? 1 : 0;
 
-    this.ksCloseR = this.output['KS11'].predCloseR[index];
-    this.ks200CloseR = this.output['KS200'].predCloseR[index];
-    this.kqCloseR = this.output['KQ11'].predCloseR[index];
+    this.ksCloseR = this.output['KS11'].predClose2[index].toFixed(2);
+    this.ks200CloseR = this.output['KS200'].predClose2[index].toFixed(2);
+    this.kqCloseR = this.output['KQ11'].predClose2[index].toFixed(2);
   };
 }
 

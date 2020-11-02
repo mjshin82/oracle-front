@@ -176,9 +176,9 @@ class Dashboard extends Component {
         let kq11CloseD = this.getDir(dashboardService.kqCloseDir)
         let kq11CenterD = this.getDir(dashboardService.kqCenterDir)
 
-        this.ks11CloseR = dashboardService.ksCloseR;
-        this.ks200CloseR = dashboardService.ks200CloseR;
-        this.kq11CloseR = dashboardService.kqCloseR;
+        let ks11CloseR = dashboardService.ksCloseR;
+        let ks200CloseR = dashboardService.ks200CloseR;
+        let kq11CloseR = dashboardService.kqCloseR;
 
         return (
             <div id="Dashboard" className="Dashboard">
@@ -195,7 +195,7 @@ class Dashboard extends Component {
                         종가: {ks11CloseD}<br/>
                         { ks11CloseR?
                             <div>
-                                당일 종가 예측: {ks11CloseR}<br/>
+                                당일 반영 종가 예측: {ks11CloseR}<br/>
                             </div>
                             : ""
                         }
@@ -216,7 +216,7 @@ class Dashboard extends Component {
                         종가: {ks200CloseD}<br/>
                         { ks200CloseR?
                             <div>
-                                당일 종가 예측: {ks11CloseR}<br/>
+                                당일 반영 종가 예측: {ks200CloseR}<br/>
                             </div>
                             : ""
                         }
@@ -237,7 +237,7 @@ class Dashboard extends Component {
                         종가: {kq11CloseD}<br/>
                         { kq11CloseR?
                             <div>
-                                당일 종가 예측: {ks11CloseR}<br/>
+                                당일 반영 종가 예측: {kq11CloseR}<br/>
                             </div>
                             : ""
                         }
