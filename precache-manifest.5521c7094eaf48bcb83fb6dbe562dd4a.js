@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "a13568fca98691fd8ec7738502bf5dc9",
+    "revision": "efa2f5ca7ca3d9db5566c0548ff03995",
     "url": "/oracle-front/index.html"
   },
   {
@@ -8,7 +8,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/oracle-front/static/css/2.7554c24b.chunk.css"
   },
   {
-    "revision": "af8eb686ca4fa6c28c12",
+    "revision": "9834c486e8bc9b06e925",
     "url": "/oracle-front/static/css/main.18158c61.chunk.css"
   },
   {
@@ -16,8 +16,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/oracle-front/static/js/2.21ba0dc1.chunk.js"
   },
   {
-    "revision": "af8eb686ca4fa6c28c12",
-    "url": "/oracle-front/static/js/main.feaa0e3b.chunk.js"
+    "revision": "9834c486e8bc9b06e925",
+    "url": "/oracle-front/static/js/main.ae6ac4cb.chunk.js"
   },
   {
     "revision": "bc2caf292d3014d87702",
